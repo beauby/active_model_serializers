@@ -25,7 +25,7 @@ module ActiveModel
       # @api private
       #
       def included?(serializer)
-        case condition
+        case condition_type
         when :if
           serializer.public_send(condition)
         when :unless
@@ -38,12 +38,14 @@ module ActiveModel
       private
 
       def condition_type
-        if options.key?(:if)
-          :if
-        elsif options.key?(:unless)
-          :unless
-        else
-          :none
+        @condition_type ||= begin
+          if options.key?(:if)
+            :if
+          elsif options.key?(:unless)
+            :unless
+          else
+            :none
+          end
         end
       end
 
