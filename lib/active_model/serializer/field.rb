@@ -38,7 +38,7 @@ module ActiveModel
       private
 
       def condition_type
-        @condition_type ||= begin
+        @condition_type ||=
           if options.key?(:if)
             :if
           elsif options.key?(:unless)
@@ -46,7 +46,6 @@ module ActiveModel
           else
             :none
           end
-        end
       end
 
       def condition
